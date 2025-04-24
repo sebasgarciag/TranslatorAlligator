@@ -1,0 +1,85 @@
+# Archivos y carpetas relacionados con .NET
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Archivos de Visual Studio
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Archivos de configuración locales/sensibles
+# NOTA: appsettings.Development.json se excluye del repositorio para proteger datos sensibles.
+# Use appsettings.Development.example.json como referencia para crear su propio archivo.
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+!appsettings.example.json
+*.env
+.env*
+!appsettings.Development.example.json
+
+# Visual Studio
+.idea/
+.ionide/
+PublishProfiles/
+*.pubxml
+*.publishsettings
+
+# Carpetas de herramientas
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+_TeamCity*
+*.dotCover
+
+# Archivos creados por test runners
+TestResults/
+[Tt]est[Rr]esult*/
+coverage*.json
+coverage*.xml
+coverage*.info
+
+# Herramientas .NET
+.dotnet/
+tools/
+
+# Archivos temporales de NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+*.nuget.props
+*.nuget.targets
+
+# Archivos específicos del sistema operativo
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+
+# Archivos de respaldo
+*~
+*.bak 
