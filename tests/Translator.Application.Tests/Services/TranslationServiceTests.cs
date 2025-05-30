@@ -95,7 +95,7 @@ namespace Translator.Application.Tests.Services
             var cacheKey = "Hello|es";
 
             _mockCache.Setup(x => x.GetAsync<string>(cacheKey))
-                .ReturnsAsync((string)null);
+                .ReturnsAsync((string?)null);
 
             _mockAiClient.Setup(x => x.TranslateTextAsync("Hello", "es"))
                 .ReturnsAsync(aiTranslation);

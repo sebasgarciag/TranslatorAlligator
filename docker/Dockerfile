@@ -1,11 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-# Copiar toda la solución primero para simplificar
-COPY . .
+# Copiar archivos de solución y proyectos
+COPY *.sln ./
+COPY src/ ./src/
 
-# Restaurar y construir solo la API principal
+# Restaurar dependencias
 RUN dotnet restore src/Translator.Api/Translator.Api.csproj
+
+# Construir y publicar la aplicación
 RUN dotnet publish "src/Translator.Api/Translator.Api.csproj" -c Release -o /app/publish
 
 # Build runtime image

@@ -373,48 +373,98 @@ Este endpoint es utilizado por:
 
 ## Pruebas
 
-El proyecto contiene una suite completa de pruebas unitarias que verifican todas las capas de la aplicación:
+El proyecto contiene una **suite completa de pruebas automatizadas** que cubre todas las capas de la aplicación con **50 pruebas** que garantizan la calidad y confiabilidad del código.
 
-### Estructura de Tests
+### 📊 Estadísticas de Pruebas
 
-- **Translator.Core.Tests**: Pruebas para los modelos de dominio y la serialización XML/JSON.
-  - Verificación de serialización/deserialización correcta de `TranslationRequest`
-  - Verificación de serialización/deserialización correcta de `TranslationResponse`
-  - Pruebas de comportamiento con listas vacías
-  
-- **Translator.Application.Tests**: Pruebas para la lógica de negocio y servicios.
-  - Verificación del servicio de traducción
-  - Validación del sistema de caché (hits/misses)
-  - Pruebas para el manejo de errores
+- **Total de Pruebas**: 50 ✅
+- **Pruebas Exitosas**: 50 ✅
+- **Pruebas Fallidas**: 0 ✅
+- **Cobertura**: Todas las capas (Core, Application, Infrastructure, API)
 
-- **Translator.Api.Tests**: Pruebas para los controladores de la API.
-  - Respuestas correctas para solicitudes válidas
-  - Manejo de errores y respuestas de error
-  - Validación de solicitudes
-
-### Ejecución de Tests
-
-Ejecuta todas las pruebas usando CLI de .NET:
+### 🏗️ Estructura de Tests
 
 ```
+tests/
+├── Translator.Core.Tests/           # 10 pruebas - Modelos y serialización
+├── Translator.Application.Tests/    # 13 pruebas - Lógica de negocio
+├── Translator.Infrastructure.Tests/ # 17 pruebas - Cache y clientes externos
+└── Translator.Api.Tests/           # 10 pruebas - Controladores y endpoints
+```
+
+#### **Translator.Core.Tests** - Modelos de Dominio
+- ✅ Serialización/deserialización XML de `TranslationRequest` y `TranslationResponse`
+- ✅ Serialización/deserialización JSON con formato camelCase
+- ✅ Manejo de valores nulos y caracteres especiales
+- ✅ Validación de estructura de datos
+
+#### **Translator.Application.Tests** - Lógica de Negocio
+- ✅ Servicio de traducción con cache hits/misses
+- ✅ Manejo exhaustivo de errores y excepciones
+- ✅ Validación de entrada y normalización de texto
+- ✅ Integración con cliente AI y sistema de cache
+- ✅ Verificación de logging y métricas
+
+#### **Translator.Infrastructure.Tests** - Infraestructura (NUEVO)
+- ✅ **Cache Provider**: Operaciones de cache, TTL, manejo de errores
+- ✅ **OpenAI Client**: Comunicación HTTP, respuestas exitosas/fallidas
+- ✅ Configuración de headers y autenticación
+- ✅ Manejo de JSON malformado y timeouts
+
+#### **Translator.Api.Tests** - Controladores
+- ✅ **TranslateController**: Respuestas correctas y manejo de errores
+- ✅ **HealthController**: Endpoint de salud con timestamps UTC
+- ✅ Validación de códigos de estado HTTP
+- ✅ Serialización de respuestas
+
+### 🔧 Ejecución de Tests
+
+```bash
+# Ejecutar todas las pruebas
 dotnet test
+
+# Ejecutar con verbosidad detallada
+dotnet test --verbosity normal
+
+# Ejecutar pruebas de un proyecto específico
+dotnet test tests/Translator.Infrastructure.Tests/
+
+# Ejecutar una prueba específica
+dotnet test --filter "FullyQualifiedName=Translator.Core.Tests.JsonSerializationTests.TranslationRequest_JsonSerialization_SerializesAndDeserializesCorrectly"
 ```
 
-Para ejecutar pruebas de un proyecto específico:
+### 🎯 Tipos de Pruebas Implementadas
 
-```
-dotnet test tests/Translator.Core.Tests
-dotnet test tests/Translator.Application.Tests
-dotnet test tests/Translator.Api.Tests
-```
+#### **Pruebas Unitarias**
+- Componentes aislados con mocks para dependencias
+- Validación de lógica de negocio
+- Manejo de casos edge y errores
 
-Para ejecutar un test específico:
+#### **Pruebas de Integración**
+- Comunicación entre capas
+- Serialización/deserialización completa
+- Flujos de datos end-to-end
 
-```
-dotnet test --filter "FullyQualifiedName=Translator.Core.Tests.SerializationTests.TranslationRequest_XmlSerialization_DeserializesCorrectly"
-```
+#### **Pruebas de Manejo de Errores**
+- Excepciones de servicios externos (OpenAI, Cache)
+- Entrada inválida o malformada
+- Timeouts y errores de red
+- Logging de errores
 
-Los tests están diseñados para verificar el correcto funcionamiento de los componentes en aislamiento, utilizando mocks para las dependencias externas como el cliente de OpenAI y el sistema de caché.
+### 📋 Escenarios de Prueba Cubiertos
+
+- ✅ **Casos de Éxito**: Traducciones exitosas, cache funcionando
+- ✅ **Casos de Error**: Servicios no disponibles, datos inválidos
+- ✅ **Casos Edge**: Texto vacío, caracteres especiales, listas grandes
+- ✅ **Validación**: Constructores, configuración, parámetros nulos
+
+### 📚 Documentación Detallada
+
+Para información completa sobre la suite de pruebas, incluyendo ejemplos de código y mejores prácticas, consulta:
+
+**[📖 Guía Completa de Pruebas](docs/TESTING_GUIDE.md)**
+
+Los tests están diseñados para verificar el correcto funcionamiento de todos los componentes en aislamiento y en integración, utilizando mocks para las dependencias externas como el cliente de OpenAI y el sistema de caché.
 
 ## Despliegue
 
